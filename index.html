@@ -1756,7 +1756,7 @@
 <body>
 
   <!-- Romantic Celebration Background Music: Aaj Sajeya by Goldie Sohel -->
-  <audio id="bgAudio" preload="auto" loop playsinline webkit-playsinline>
+  <audio id="bgAudio" src="assets/bg_music.mp3" preload="auto" loop playsinline webkit-playsinline x5-playsinline>
     <source src="assets/bg_music.mp3" type="audio/mpeg">
     <source src="assets/Aaj%20Sajeya%20Goldie%20Sohel%20320%20Kbps.mp3" type="audio/mpeg">
     <source src="assets/Aaj Sajeya Goldie Sohel 320 Kbps.mp3" type="audio/mpeg">
@@ -2493,13 +2493,79 @@
       let isCoverOpened = false;
       const TARGET_VOLUME = 0.65;
 
+      // Web Audio API AudioContext Unlocker for Mobile (iOS Safari & Android Chrome)
+      let audioCtx = null;
+      function unlockAudioContext() {
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) {
+            if (!audioCtx) {
+              audioCtx = new AudioContextClass();
+            }
+            if (audioCtx.state === 'suspended') {
+              audioCtx.resume();
+            }
+            // Prime iOS Safari / WebKit hardware audio pipeline with silent buffer
+            if (audioCtx.createBuffer) {
+              const buffer = audioCtx.createBuffer(1, 1, 22050);
+              const source = audioCtx.createBufferSource();
+              source.buffer = buffer;
+              source.connect(audioCtx.destination);
+              source.start(0);
+            }
+          }
+        } catch (e) {
+          // Graceful fallback if Web Audio is unsupported or restricted
+        }
+      }
+
+      // Safe, synchronous mobile-compliant audio player directly inside user gesture
+      function playAudio() {
+        if (!bgAudio) return;
+
+        // 1. Immediately resume / unlock AudioContext within the user gesture
+        unlockAudioContext();
+
+        // 2. Configure audio element unmuted & target volume safely
+        bgAudio.muted = false;
+        try {
+          bgAudio.volume = TARGET_VOLUME;
+        } catch (e) {
+          // Read-only on iOS Safari
+        }
+
+        // 3. Avoid interrupting if already actively playing
+        if (!bgAudio.paused && bgAudio.currentTime > 0) {
+          hasUnmutedWithSound = true;
+          updateMusicUI(true);
+          return;
+        }
+
+        // 4. Synchronously invoke play() directly in user gesture
+        const playPromise = bgAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(function() {
+            hasUnmutedWithSound = true;
+            updateMusicUI(true);
+            removeSilentInteractionListeners();
+          }).catch(function(err) {
+            console.warn('Playback gesture pending or blocked:', err);
+            updateMusicUI(false);
+          });
+        }
+      }
+
       if (bgAudio) {
-        bgAudio.volume = TARGET_VOLUME;
+        try {
+          bgAudio.volume = TARGET_VOLUME;
+        } catch (e) {}
         bgAudio.loop = true;
 
         // Guaranteed loop safeguard across all mobile browsers
         bgAudio.addEventListener('ended', function() {
-          bgAudio.currentTime = 0;
+          try {
+            bgAudio.currentTime = 0;
+          } catch (e) {}
           bgAudio.play().catch(function() {});
         });
       }
@@ -2641,33 +2707,21 @@
         draw();
       })();
 
-      // Open Invitation Function (Clicking Cover Opens Card + Starts Music)
+      // Open Invitation Function (Clicking/Tapping Cover Opens Card + Starts Music)
       function openInvitation(e) {
+        // Direct, synchronous invocation of play inside user gesture
+        playAudio();
+
         if (isCoverOpened) return;
         isCoverOpened = true;
         hasUnmutedWithSound = true;
         sessionStorage.setItem('invitation_opened', 'true');
-        removeSilentInteractionListeners();
 
-        // Celebration burst at click location
-        var clickX = (e && e.clientX) ? e.clientX : window.innerWidth / 2;
-        var clickY = (e && e.clientY) ? e.clientY : window.innerHeight / 2;
+        // Celebration burst at click/touch location
+        var touch = (e && e.touches && e.touches[0]) || (e && e.changedTouches && e.changedTouches[0]);
+        var clickX = touch ? touch.clientX : ((e && e.clientX) ? e.clientX : window.innerWidth / 2);
+        var clickY = touch ? touch.clientY : ((e && e.clientY) ? e.clientY : window.innerHeight / 2);
         triggerCoverCelebration(clickX, clickY);
-
-        // Synchronously trigger background music playback (Guaranteed browser unlock gesture!)
-        if (bgAudio) {
-          bgAudio.currentTime = 0;
-          bgAudio.muted = false;
-          bgAudio.volume = TARGET_VOLUME;
-          var playPromise = bgAudio.play();
-          if (playPromise !== undefined) {
-            playPromise.then(function() {
-              updateMusicUI(true);
-            }).catch(function(err) {
-              console.warn('Playback error on open:', err);
-            });
-          }
-        }
 
         // Animate and reveal main website
         if (invitationCover) {
@@ -2692,33 +2746,37 @@
           }
         }
       } else if (invitationCover) {
-        invitationCover.addEventListener('click', openInvitation);
-        invitationCover.addEventListener('touchstart', openInvitation, { passive: true });
+        // Mobile & Desktop Gesture Listeners:
+        // Handle touchstart directly inside the touch gesture
+        invitationCover.addEventListener('touchstart', function(e) {
+          playAudio();
+        }, { passive: true });
+
+        // Handle touchend for iOS Safari tap completion
+        invitationCover.addEventListener('touchend', function(e) {
+          playAudio();
+        }, { passive: true });
+
+        // Handle click for universal desktop & mobile click synthesis
+        invitationCover.addEventListener('click', function(e) {
+          openInvitation(e);
+        });
       }
 
       // Silent Interaction Fallback (for returning visitors or background tab returns)
       var silentListenersAttached = false;
-      var interactionEvents = ['click', 'touchstart', 'touchend', 'pointerdown', 'mousedown', 'keydown', 'scroll', 'wheel'];
+      var interactionEvents = ['click', 'touchstart', 'touchend', 'pointerup', 'keydown'];
 
       function handleSilentInteraction(e) {
         if (invitationCover && (invitationCover === e.target || invitationCover.contains(e.target))) {
-          return; // Let openInvitation handle cover clicks
+          return; // Handled by cover listeners
         }
         if (musicToggle && (musicToggle === e.target || musicToggle.contains(e.target))) {
-          return; // Let musicToggle click listener handle its own event
+          return; // Handled by music toggle listener
         }
         if (!bgAudio) return;
 
-        hasUnmutedWithSound = true;
-        bgAudio.muted = false;
-        bgAudio.volume = TARGET_VOLUME;
-        var p = bgAudio.play();
-        if (p !== undefined) {
-          p.then(function() {
-            updateMusicUI(true);
-          }).catch(function() {});
-        }
-        removeSilentInteractionListeners();
+        playAudio();
       }
 
       function attachSilentInteractionListeners() {
@@ -2754,13 +2812,7 @@
             bgAudio.pause();
             updateMusicUI(false);
           } else {
-            bgAudio.muted = false;
-            bgAudio.volume = TARGET_VOLUME;
-            bgAudio.play().then(function() {
-              updateMusicUI(true);
-            }).catch(function(err) {
-              console.error('Play error on toggle click:', err);
-            });
+            playAudio();
           }
         });
       }
@@ -2768,6 +2820,7 @@
       // Tab visibility safeguard
       document.addEventListener('visibilitychange', function() {
         if (!document.hidden && hasUnmutedWithSound && bgAudio && bgAudio.paused && isMusicPlaying) {
+          unlockAudioContext();
           bgAudio.play().catch(function() {});
         }
       });
