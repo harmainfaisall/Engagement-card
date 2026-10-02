@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>The Engagement of Saamit &amp; Amna | Official Celebration</title>
   
+  <!-- Immediate Anti-Flicker Session Check for Open Invitation Experience -->
+  <script>
+    if (sessionStorage.getItem('invitation_opened') === 'true') {
+      document.documentElement.classList.add('invitation-already-opened');
+    }
+  </script>
+  
   <!-- Premium Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -221,6 +228,535 @@
     @keyframes eqJump {
       0% { height: 3px; }
       100% { height: 12px; }
+    }
+
+    /* ==========================================================================
+       ROYAL "OPEN INVITATION" FULL-SCREEN COVER EXPERIENCE
+       Ultra-Luxury Ivory, Champagne Gold Foil, Bespoke Botanical Line Art
+       ========================================================================== */
+    .invitation-already-opened #invitationCover {
+      display: none !important;
+    }
+
+    .invitation-cover {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+      background: radial-gradient(circle at 50% 40%, #fdfbf7 0%, #f8f3e9 45%, #f2e7d3 85%, #ecddc6 100%);
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      overflow: hidden;
+      transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+                  visibility 0.85s;
+    }
+
+    /* Ambient Warm Ivory & Soft Golden Backlight */
+    .cover-backdrop-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 50% 30%, rgba(255, 252, 245, 0.85) 0%, transparent 65%),
+        radial-gradient(circle at 15% 80%, rgba(235, 175, 185, 0.16) 0%, transparent 50%),
+        radial-gradient(circle at 85% 70%, rgba(223, 186, 99, 0.22) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b38728' fill-opacity='0.022' fill-rule='evenodd'%3E%3Cpath d='M40 0c6 10 14 14 24 14s14-4 24-14c-10 6-14 14-14 24s4 14 14 24c-10-6-14-14-24-14s-14 4-24 14c10-6 14-14 14-24S44 10 40 0zm0 80c-6-10-14-14-24-14s-14 4-24 14c10-6 14-14 14-24s-4-14-14-24c10 6 14 14 24 14s14-4 24-14c-10 6-14 14-14 24s4 14 14 24z'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* Floating Golden Dust Particles Canvas */
+    .cover-particles-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* The Ultra-Luxury Physical Invitation Card */
+    .cover-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 440px;
+      background: #fffffe;
+      background-image: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 1) 0%, rgba(254, 251, 246, 0.98) 60%, rgba(250, 245, 235, 0.95) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.42);
+      border-radius: 24px;
+      padding: 38px 26px 32px;
+      box-shadow: 
+        0 32px 90px -15px rgba(180, 135, 55, 0.22), 
+        0 12px 32px -5px rgba(50, 35, 15, 0.06),
+        inset 0 0 50px rgba(255, 250, 240, 0.85);
+      text-align: center;
+      transform: scale(1) translateY(0);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cover-card:hover {
+      transform: scale(1.015) translateY(-3px);
+      box-shadow: 
+        0 38px 105px -12px rgba(180, 135, 55, 0.28), 
+        0 16px 38px -4px rgba(50, 35, 15, 0.08),
+        inset 0 0 60px rgba(255, 250, 240, 0.95);
+    }
+
+    /* Refined Thin Botanical Line Art Corners */
+    .cover-corner-botanical {
+      position: absolute;
+      width: 68px;
+      height: 68px;
+      pointer-events: none;
+      filter: drop-shadow(0 1px 3px rgba(184, 134, 11, 0.18));
+      opacity: 0.88;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .cover-corner-tl { top: 9px; left: 9px; }
+    .cover-corner-tr { top: 9px; right: 9px; transform: scaleX(-1); }
+    .cover-corner-bl { bottom: 9px; left: 9px; transform: scaleY(-1); }
+    .cover-corner-br { bottom: 9px; right: 9px; transform: scale(-1); }
+
+    .cover-card:hover .cover-corner-botanical {
+      opacity: 1;
+      filter: drop-shadow(0 1px 6px rgba(212, 175, 55, 0.35));
+    }
+
+    /* Delicate Inner Border */
+    .cover-inner-border {
+      position: relative;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      border-radius: 18px;
+      padding: 30px 20px 24px;
+      background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.92) 0%, rgba(253, 249, 242, 0.65) 100%);
+    }
+
+    /* Circular Elegant Monogram "S & A" */
+    .cover-monogram-wrapper {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cover-monogram-halo {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(223, 186, 99, 0.65);
+      animation: monogramHaloPulse 2.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+      pointer-events: none;
+    }
+
+    @keyframes monogramHaloPulse {
+      0%, 100% {
+        transform: scale(0.96);
+        opacity: 0.6;
+        box-shadow: 0 0 10px rgba(218, 165, 32, 0.2);
+      }
+      50% {
+        transform: scale(1.18);
+        opacity: 0.15;
+        box-shadow: 0 0 25px rgba(218, 165, 32, 0.4);
+      }
+    }
+
+    .cover-monogram-circle {
+      position: relative;
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fdf9f2 50%, #f4e8d3 100%);
+      box-shadow: 
+        0 8px 24px rgba(184, 134, 11, 0.22),
+        inset 0 1px 3px rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: monogramGentleGlow 3.6s ease-in-out infinite;
+    }
+
+    @keyframes monogramGentleGlow {
+      0%, 100% {
+        filter: drop-shadow(0 2px 8px rgba(184, 134, 11, 0.22));
+        border-color: rgba(212, 175, 55, 0.6);
+      }
+      50% {
+        filter: drop-shadow(0 4px 18px rgba(223, 186, 99, 0.55)) drop-shadow(0 0 24px rgba(255, 235, 170, 0.35));
+        border-color: rgba(235, 195, 85, 0.9);
+      }
+    }
+
+    .cover-monogram-ring-svg {
+      position: absolute;
+      inset: -6px;
+      width: 78px;
+      height: 78px;
+      pointer-events: none;
+      filter: drop-shadow(0 1px 2px rgba(184, 134, 11, 0.2));
+    }
+
+    .cover-monogram-letters {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .cover-monogram-letters .mono-s,
+    .cover-monogram-letters .mono-a {
+      font-family: var(--font-royal);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #7a581e 0%, #b8860b 40%, #fbf1c9 60%, #9e7422 80%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-monogram-letters .mono-amp {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.02rem;
+      font-weight: 400;
+      margin: 0 2px;
+      color: #b8860b;
+      opacity: 0.95;
+    }
+
+    /* Tagline & Couple Royal Moniker */
+    .cover-tagline {
+      font-family: var(--font-royal);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      color: #9c7832;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      opacity: 0.95;
+    }
+
+    .cover-couple {
+      font-family: var(--font-royal);
+      font-size: clamp(1.15rem, 3.8vw, 1.45rem);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #704d16 0%, #b8860b 42%, #5e3f0e 75%, #a67c2e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .cover-couple-amp {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.05em;
+      margin: 0 4px;
+      background: linear-gradient(135deg, #b8860b 0%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Small Gold Diamond Ring Icon with Thin Lines */
+    .cover-ring-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 4px auto 14px;
+      width: 100%;
+      max-width: 230px;
+    }
+
+    .cover-divider-line {
+      flex: 1;
+      height: 1px;
+    }
+
+    .cover-divider-line.left {
+      background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.6));
+    }
+
+    .cover-divider-line.right {
+      background: linear-gradient(90deg, rgba(197, 160, 89, 0.6), transparent);
+    }
+
+    .cover-ring-icon-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 32px;
+      filter: drop-shadow(0 2px 6px rgba(184, 134, 11, 0.28));
+      animation: ringGleam 3.2s ease-in-out infinite;
+    }
+
+    @keyframes ringGleam {
+      0%, 100% {
+        filter: drop-shadow(0 1px 4px rgba(184, 134, 11, 0.22));
+      }
+      50% {
+        filter: drop-shadow(0 2px 10px rgba(223, 186, 99, 0.65)) drop-shadow(0 0 14px rgba(255, 235, 170, 0.45));
+      }
+    }
+
+    .cover-ring-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* Main Requested Text: "OPEN YOUR INVITATION ♡" */
+    .cover-main-text {
+      font-family: var(--font-royal);
+      font-size: clamp(1.35rem, 4.4vw, 1.82rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #7a581e 0%, #b8860b 28%, #fbf1c9 50%, #9e7422 72%, #d4af37 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 7px;
+      line-height: 1.25;
+      animation: mainTextShimmer 7s ease-in-out infinite, mainTextGlow 3.5s ease-in-out infinite;
+    }
+
+    @keyframes mainTextShimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes mainTextGlow {
+      0%, 100% {
+        filter: drop-shadow(0 1px 3px rgba(184, 134, 11, 0.2));
+        opacity: 0.96;
+      }
+      50% {
+        filter: drop-shadow(0 2px 14px rgba(218, 165, 32, 0.55)) drop-shadow(0 0 25px rgba(255, 235, 170, 0.35));
+        opacity: 1;
+      }
+    }
+
+    .cover-heart-symbol {
+      display: inline-block;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, serif;
+      font-weight: 400;
+      font-size: 0.95em;
+      margin-left: 3px;
+      vertical-align: baseline;
+      animation: heartPulse 2.4s ease-in-out infinite;
+      background: linear-gradient(135deg, #b84d66 0%, #d4af37 60%, #e2aab5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    /* Subtitle: "A Beautiful Beginning Awaits" */
+    .cover-subtitle {
+      font-family: var(--font-serif);
+      font-size: clamp(1.22rem, 3.8vw, 1.48rem);
+      font-style: italic;
+      font-weight: 400;
+      color: #7a6042;
+      letter-spacing: 0.03em;
+      margin-bottom: 22px;
+      line-height: 1.3;
+      opacity: 0.92;
+    }
+
+    /* Interactive Tap Button: "CLICK ANYWHERE TO OPEN" */
+    .cover-tap-prompt {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .cover-tap-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 32px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(253, 248, 238, 0.9) 50%, rgba(248, 239, 222, 0.95) 100%);
+      color: #6d4f18;
+      border: 1px solid rgba(197, 160, 89, 0.55);
+      border-radius: 50px;
+      font-family: var(--font-royal);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 24px rgba(184, 134, 11, 0.16), 0 2px 6px rgba(0, 0, 0, 0.03), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: tapPromptAura 2.6s ease-in-out infinite;
+    }
+
+    .cover-tap-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: rgba(212, 175, 55, 0.9);
+      box-shadow: 0 12px 32px rgba(184, 134, 11, 0.28), 0 0 18px rgba(223, 186, 99, 0.35);
+    }
+
+    .cover-tap-icon {
+      width: 15px;
+      height: 15px;
+      color: #b8860b;
+      flex-shrink: 0;
+      animation: envFloat 2s ease-in-out infinite;
+    }
+
+    @keyframes envFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
+    }
+
+    @keyframes tapPromptAura {
+      0%, 100% {
+        box-shadow: 0 6px 20px rgba(184, 134, 11, 0.14), 0 0 0 0 rgba(212, 175, 55, 0.35);
+        border-color: rgba(197, 160, 89, 0.5);
+      }
+      50% {
+        box-shadow: 0 10px 28px rgba(184, 134, 11, 0.26), 0 0 0 7px rgba(212, 175, 55, 0);
+        border-color: rgba(218, 165, 32, 0.8);
+      }
+    }
+
+    /* Opening Animation when User Clicks */
+    .invitation-cover.opening {
+      pointer-events: none;
+      animation: coverFadeOut 0.85s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .invitation-cover.opening .cover-card {
+      animation: cardOpenFold 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes coverFadeOut {
+      0% {
+        opacity: 1;
+      }
+      60% {
+        opacity: 0.85;
+      }
+      100% {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    @keyframes cardOpenFold {
+      0% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+        filter: blur(0);
+      }
+      35% {
+        transform: scale(1.05) translateY(-8px);
+        box-shadow: 0 40px 110px rgba(184, 134, 11, 0.45);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.15) translateY(-26px);
+        opacity: 0;
+        filter: blur(10px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cover-card {
+        padding: 28px 16px 24px;
+        border-radius: 20px;
+      }
+      .cover-inner-border {
+        padding: 24px 14px 20px;
+        border-radius: 16px;
+      }
+      .cover-corner-botanical {
+        width: 48px;
+        height: 48px;
+      }
+      .cover-corner-tl { top: 6px; left: 6px; }
+      .cover-corner-tr { top: 6px; right: 6px; }
+      .cover-corner-bl { bottom: 6px; left: 6px; }
+      .cover-corner-br { bottom: 6px; right: 6px; }
+
+      .cover-monogram-wrapper {
+        width: 66px;
+        height: 66px;
+        margin-bottom: 12px;
+      }
+      .cover-monogram-circle {
+        width: 58px;
+        height: 58px;
+      }
+      .cover-monogram-ring-svg {
+        width: 68px;
+        height: 68px;
+        inset: -5px;
+      }
+      .cover-monogram-letters .mono-s,
+      .cover-monogram-letters .mono-a {
+        font-size: 1.1rem;
+      }
+      .cover-monogram-letters .mono-amp {
+        font-size: 0.92rem;
+      }
+      .cover-tagline {
+        font-size: 0.58rem;
+        letter-spacing: 0.22em;
+      }
+      .cover-couple {
+        font-size: 1.08rem;
+        letter-spacing: 0.14em;
+        margin-bottom: 10px;
+      }
+      .cover-ring-divider {
+        max-width: 190px;
+        margin-bottom: 10px;
+      }
+      .cover-ring-icon-wrap {
+        width: 44px;
+        height: 28px;
+      }
+      .cover-main-text {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+      }
+      .cover-subtitle {
+        font-size: 1.12rem;
+        margin-bottom: 18px;
+      }
+      .cover-tap-btn {
+        padding: 11px 24px;
+        font-size: 0.66rem;
+        letter-spacing: 0.15em;
+        gap: 8px;
+      }
     }
 
     /* ==========================================================================
@@ -898,8 +1434,8 @@
 
 <body>
 
-  <!-- Romantic Celebration Background Music: Aaj Sajeya by Goldie Sohel (Autoplay Enabled) -->
-  <audio id="bgAudio" preload="auto" loop autoplay playsinline>
+  <!-- Romantic Celebration Background Music: Aaj Sajeya by Goldie Sohel -->
+  <audio id="bgAudio" preload="auto" loop playsinline webkit-playsinline>
     <source src="assets/bg_music.mp3" type="audio/mpeg">
     <source src="assets/Aaj%20Sajeya%20Goldie%20Sohel%20320%20Kbps.mp3" type="audio/mpeg">
     <source src="assets/Aaj Sajeya Goldie Sohel 320 Kbps.mp3" type="audio/mpeg">
@@ -913,6 +1449,166 @@
 
   <!-- Interactive Sparkle Click Generator -->
   <div id="sparkle-layer"></div>
+
+  <!-- ==========================================================================
+       ROYAL "OPEN INVITATION" COVER EXPERIENCE
+       ========================================================================== -->
+  <div id="invitationCover" class="invitation-cover" role="dialog" aria-modal="true" aria-label="Open Engagement Invitation">
+    <!-- SVG Defs for Gold Foils & Delicate Lighting -->
+    <svg width="0" height="0" class="cover-svg-defs" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
+      <defs>
+        <linearGradient id="goldFoilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ECC880"/>
+          <stop offset="30%" stop-color="#B8860B"/>
+          <stop offset="50%" stop-color="#FDF2D0"/>
+          <stop offset="75%" stop-color="#9E7422"/>
+          <stop offset="100%" stop-color="#D4AF37"/>
+        </linearGradient>
+        <linearGradient id="goldFoilSoft" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(247, 236, 210, 0.5)"/>
+          <stop offset="100%" stop-color="rgba(223, 186, 99, 0.22)"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <div class="cover-backdrop-pattern"></div>
+    <canvas id="cover-gold-particles" class="cover-particles-canvas"></canvas>
+    
+    <div class="cover-card">
+      <!-- Refined Thin Botanical Line Art Corners in Soft Gold -->
+      <svg class="cover-corner-botanical cover-corner-tl" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M 6 32 L 6 6 L 32 6" stroke="url(#goldFoilGrad)" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
+        <circle cx="6" cy="6" r="1.5" fill="url(#goldFoilGrad)" opacity="0.8"/>
+        <path d="M 8 72 C 11 48, 26 26, 72 8" stroke="url(#goldFoilGrad)" stroke-width="1.1" stroke-linecap="round"/>
+        <path d="M 18 52 C 14 45, 16 36, 23 37 C 25 43, 23 50, 18 52 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 28 44 C 30 37, 38 34, 40 40 C 36 46, 30 47, 28 44 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 36 34 C 35 26, 40 20, 46 21 C 47 27, 43 32, 36 34 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 48 26 C 52 19, 59 19, 61 25 C 57 30, 51 30, 48 26 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 60 16 C 64 9, 71 10, 72 16 C 68 20, 63 20, 60 16 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 24 48 C 28 56, 35 59, 41 57" stroke="url(#goldFoilGrad)" stroke-width="0.7" stroke-linecap="round"/>
+        <circle cx="41.5" cy="57" r="1.2" fill="url(#goldFoilGrad)"/>
+        <path d="M 44 31 C 52 35, 57 41, 55 47" stroke="url(#goldFoilGrad)" stroke-width="0.7" stroke-linecap="round"/>
+        <circle cx="55" cy="47" r="1.2" fill="url(#goldFoilGrad)"/>
+        <circle cx="72.5" cy="8" r="1.8" fill="url(#goldFoilGrad)"/>
+        <circle cx="8" cy="72.5" r="1.8" fill="url(#goldFoilGrad)"/>
+      </svg>
+
+      <svg class="cover-corner-botanical cover-corner-tr" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M 6 32 L 6 6 L 32 6" stroke="url(#goldFoilGrad)" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
+        <circle cx="6" cy="6" r="1.5" fill="url(#goldFoilGrad)" opacity="0.8"/>
+        <path d="M 8 72 C 11 48, 26 26, 72 8" stroke="url(#goldFoilGrad)" stroke-width="1.1" stroke-linecap="round"/>
+        <path d="M 18 52 C 14 45, 16 36, 23 37 C 25 43, 23 50, 18 52 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 28 44 C 30 37, 38 34, 40 40 C 36 46, 30 47, 28 44 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 36 34 C 35 26, 40 20, 46 21 C 47 27, 43 32, 36 34 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 48 26 C 52 19, 59 19, 61 25 C 57 30, 51 30, 48 26 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 60 16 C 64 9, 71 10, 72 16 C 68 20, 63 20, 60 16 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 24 48 C 28 56, 35 59, 41 57" stroke="url(#goldFoilGrad)" stroke-width="0.7" stroke-linecap="round"/>
+        <circle cx="41.5" cy="57" r="1.2" fill="url(#goldFoilGrad)"/>
+        <path d="M 44 31 C 52 35, 57 41, 55 47" stroke="url(#goldFoilGrad)" stroke-width="0.7" stroke-linecap="round"/>
+        <circle cx="55" cy="47" r="1.2" fill="url(#goldFoilGrad)"/>
+        <circle cx="72.5" cy="8" r="1.8" fill="url(#goldFoilGrad)"/>
+        <circle cx="8" cy="72.5" r="1.8" fill="url(#goldFoilGrad)"/>
+      </svg>
+
+      <svg class="cover-corner-botanical cover-corner-bl" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M 6 32 L 6 6 L 32 6" stroke="url(#goldFoilGrad)" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
+        <circle cx="6" cy="6" r="1.5" fill="url(#goldFoilGrad)" opacity="0.8"/>
+        <path d="M 8 72 C 11 48, 26 26, 72 8" stroke="url(#goldFoilGrad)" stroke-width="1.1" stroke-linecap="round"/>
+        <path d="M 18 52 C 14 45, 16 36, 23 37 C 25 43, 23 50, 18 52 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 28 44 C 30 37, 38 34, 40 40 C 36 46, 30 47, 28 44 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 36 34 C 35 26, 40 20, 46 21 C 47 27, 43 32, 36 34 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 48 26 C 52 19, 59 19, 61 25 C 57 30, 51 30, 48 26 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 60 16 C 64 9, 71 10, 72 16 C 68 20, 63 20, 60 16 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 24 48 C 28 56, 35 59, 41 57" stroke="url(#goldFoilGrad)" stroke-width="0.7" stroke-linecap="round"/>
+        <circle cx="41.5" cy="57" r="1.2" fill="url(#goldFoilGrad)"/>
+        <path d="M 44 31 C 52 35, 57 41, 55 47" stroke="url(#goldFoilGrad)" stroke-width="0.7" stroke-linecap="round"/>
+        <circle cx="55" cy="47" r="1.2" fill="url(#goldFoilGrad)"/>
+        <circle cx="72.5" cy="8" r="1.8" fill="url(#goldFoilGrad)"/>
+        <circle cx="8" cy="72.5" r="1.8" fill="url(#goldFoilGrad)"/>
+      </svg>
+
+      <svg class="cover-corner-botanical cover-corner-br" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M 6 32 L 6 6 L 32 6" stroke="url(#goldFoilGrad)" stroke-width="0.8" stroke-linecap="round" opacity="0.65"/>
+        <circle cx="6" cy="6" r="1.5" fill="url(#goldFoilGrad)" opacity="0.8"/>
+        <path d="M 8 72 C 11 48, 26 26, 72 8" stroke="url(#goldFoilGrad)" stroke-width="1.1" stroke-linecap="round"/>
+        <path d="M 18 52 C 14 45, 16 36, 23 37 C 25 43, 23 50, 18 52 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 28 44 C 30 37, 38 34, 40 40 C 36 46, 30 47, 28 44 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 36 34 C 35 26, 40 20, 46 21 C 47 27, 43 32, 36 34 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 48 26 C 52 19, 59 19, 61 25 C 57 30, 51 30, 48 26 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 60 16 C 64 9, 71 10, 72 16 C 68 20, 63 20, 60 16 Z" fill="url(#goldFoilSoft)" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+        <path d="M 24 48 C 28 56, 35 59, 41 57" stroke="url(#goldFoilGrad)" stroke-width="0.7" stroke-linecap="round"/>
+        <circle cx="41.5" cy="57" r="1.2" fill="url(#goldFoilGrad)"/>
+        <path d="M 44 31 C 52 35, 57 41, 55 47" stroke="url(#goldFoilGrad)" stroke-width="0.7" stroke-linecap="round"/>
+        <circle cx="55" cy="47" r="1.2" fill="url(#goldFoilGrad)"/>
+        <circle cx="72.5" cy="8" r="1.8" fill="url(#goldFoilGrad)"/>
+        <circle cx="8" cy="72.5" r="1.8" fill="url(#goldFoilGrad)"/>
+      </svg>
+
+      <!-- Delicate Inner Filigree Border -->
+      <div class="cover-inner-border">
+        
+        <!-- Circular Elegant Monogram "S & A" at the top with soft metallic gold effect -->
+        <div class="cover-monogram-wrapper">
+          <div class="cover-monogram-halo"></div>
+          <div class="cover-monogram-circle">
+            <svg class="cover-monogram-ring-svg" viewBox="0 0 96 96" aria-hidden="true">
+              <circle cx="48" cy="48" r="44.5" stroke="url(#goldFoilGrad)" stroke-width="0.8" stroke-dasharray="2 3.5" opacity="0.8" fill="none" />
+              <circle cx="48" cy="48" r="41" stroke="url(#goldFoilGrad)" stroke-width="1.3" fill="none" />
+              <circle cx="48" cy="48" r="37.5" stroke="url(#goldFoilGrad)" stroke-width="0.7" opacity="0.55" fill="none" />
+            </svg>
+            <div class="cover-monogram-letters">
+              <span class="mono-s">S</span>
+              <span class="mono-amp">&amp;</span>
+              <span class="mono-a">A</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cover-tagline">THE ENGAGEMENT CELEBRATION</div>
+        <div class="cover-couple">SAAMIT <span class="cover-couple-amp">&amp;</span> AMNA</div>
+
+        <!-- Small Gold Diamond Ring Icon with Thin Lines -->
+        <div class="cover-ring-divider" aria-hidden="true">
+          <span class="cover-divider-line left"></span>
+          <div class="cover-ring-icon-wrap">
+            <svg class="cover-ring-svg" viewBox="0 0 68 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 21 24 C 21 33, 47 33, 47 24 C 47 18, 41 16, 34 16 C 27 16, 21 18, 21 24 Z" stroke="url(#goldFoilGrad)" stroke-width="1.2" fill="none"/>
+              <path d="M 29 15 L 31 10.5" stroke="url(#goldFoilGrad)" stroke-width="1.1" stroke-linecap="round"/>
+              <path d="M 39 15 L 37 10.5" stroke="url(#goldFoilGrad)" stroke-width="1.1" stroke-linecap="round"/>
+              <polygon points="29,5.5 39,5.5 43,10 25,10" stroke="url(#goldFoilGrad)" stroke-width="1" fill="rgba(255, 252, 246, 0.95)"/>
+              <polygon points="25,10 43,10 34,16" stroke="url(#goldFoilGrad)" stroke-width="1" fill="rgba(255, 246, 228, 0.8)"/>
+              <line x1="29" y1="5.5" x2="31" y2="10" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+              <line x1="39" y1="5.5" x2="37" y2="10" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+              <line x1="31" y1="10" x2="34" y2="16" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+              <line x1="37" y1="10" x2="34" y2="16" stroke="url(#goldFoilGrad)" stroke-width="0.75"/>
+              <path d="M 34 0.5 Q 34 3 32.5 3 Q 34 3 34 5.5 Q 34 3 35.5 3 Q 34 3 34 0.5 Z" fill="url(#goldFoilGrad)"/>
+              <path d="M 18 6.5 Q 18 8.5 16.5 8.5 Q 18 8.5 18 10.5 Q 18 8.5 19.5 8.5 Q 18 8.5 18 6.5 Z" fill="url(#goldFoilGrad)" opacity="0.85"/>
+              <path d="M 50 6.5 Q 50 8.5 48.5 8.5 Q 50 8.5 50 10.5 Q 50 8.5 51.5 8.5 Q 50 8.5 50 6.5 Z" fill="url(#goldFoilGrad)" opacity="0.85"/>
+            </svg>
+          </div>
+          <span class="cover-divider-line right"></span>
+        </div>
+
+        <!-- Main Required Text -->
+        <h1 class="cover-main-text">OPEN YOUR INVITATION <span class="cover-heart-symbol">♡</span></h1>
+        
+        <!-- Elegantly Written Subtitle -->
+        <p class="cover-subtitle">A Beautiful Beginning Awaits</p>
+
+        <!-- Interactive Tap Button -->
+        <div class="cover-tap-prompt">
+          <div class="cover-tap-btn">
+            <svg class="cover-tap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <span>CLICK ANYWHERE TO OPEN</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <!-- ==========================================================================
        TOP NAVIGATION BAR
@@ -1336,16 +2032,31 @@
       }
 
       // ------------------------------------------------------------------------
-      // 6. INSTANT AUTOMATIC MUSIC PLAYBACK: "Aaj Sajeya" by Goldie Sohel
-      // Automatically starts playing as soon as website opens without clicking button!
+      // 6. ROYAL "OPEN INVITATION" EXPERIENCE & ROMANTIC MUSIC ENGINE
       // ------------------------------------------------------------------------
       const bgAudio = document.getElementById('bgAudio');
       const musicToggle = document.getElementById('musicToggle');
       const musicLabel = document.getElementById('musicLabel');
-      let isPlaying = false;
+      const invitationCover = document.getElementById('invitationCover');
 
-      function setMusicState(active) {
-        isPlaying = active;
+      let isMusicPlaying = false;
+      let hasUnmutedWithSound = false;
+      let isCoverOpened = false;
+      const TARGET_VOLUME = 0.65;
+
+      if (bgAudio) {
+        bgAudio.volume = TARGET_VOLUME;
+        bgAudio.loop = true;
+
+        // Guaranteed loop safeguard across all mobile browsers
+        bgAudio.addEventListener('ended', function() {
+          bgAudio.currentTime = 0;
+          bgAudio.play().catch(function() {});
+        });
+      }
+
+      function updateMusicUI(active) {
+        isMusicPlaying = active;
         if (musicToggle) {
           if (active) {
             musicToggle.classList.add('music-playing');
@@ -1357,88 +2068,260 @@
         }
       }
 
-      function playMusicDirectly() {
-        if (!bgAudio) return;
-        bgAudio.volume = 0.75;
-        
-        // 1. Direct unmuted play attempt immediately on page open
-        const promise = bgAudio.play();
-        if (promise !== undefined) {
-          promise.then(() => {
-            setMusicState(true);
-            removeAutoListeners();
-          }).catch(() => {
-            // If browser autoplay policy blocks unmuted audio before user interaction:
-            // 2. Play muted immediately so streaming/playback begins without delay!
-            bgAudio.muted = true;
-            bgAudio.play().then(() => {
-              // Playing muted in background
-            }).catch(() => {});
+      // Celebratory sparkle flurry on invitation unseal
+      function triggerCoverCelebration(originX, originY) {
+        const symbols = ['✦', '✧', '🌸', '✨', '💍', '♥', '🕊️'];
+        const layer = document.getElementById('sparkle-layer') || document.body;
+        for (let i = 0; i < 32; i++) {
+          const spark = document.createElement('div');
+          spark.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+          const angle = Math.random() * Math.PI * 2;
+          const distance = Math.random() * 190 + 50;
+          const duration = Math.random() * 900 + 800;
+          const size = Math.random() * 18 + 14;
+
+          spark.style.position = 'fixed';
+          spark.style.left = originX + 'px';
+          spark.style.top = originY + 'px';
+          spark.style.fontSize = size + 'px';
+          spark.style.color = (i % 2 === 0) ? '#b84d66' : '#d4af37';
+          spark.style.pointerEvents = 'none';
+          spark.style.zIndex = '9999999';
+          spark.style.transition = 'transform ' + duration + 'ms cubic-bezier(0.1, 0.8, 0.2, 1), opacity ' + duration + 'ms ease-out';
+
+          layer.appendChild(spark);
+
+          requestAnimationFrame(function() {
+            const dx = Math.cos(angle) * distance;
+            const dy = Math.sin(angle) * distance;
+            spark.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) scale(0)';
+            spark.style.opacity = '0';
+          });
+
+          setTimeout(function() {
+            spark.remove();
+          }, duration + 100);
+        }
+      }
+
+      // Floating Golden Dust Particles for Ultra-Luxury Opening Card
+      (function initCoverParticles() {
+        var canvas = document.getElementById('cover-gold-particles');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        var animId;
+        var particles = [];
+        var w = 0, h = 0;
+
+        function resize() {
+          w = canvas.width = window.innerWidth;
+          h = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        var count = Math.min(42, Math.max(22, Math.floor(window.innerWidth / 25)));
+        for (var i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * (w || 400),
+            y: Math.random() * (h || 800),
+            radius: Math.random() * 2.2 + 0.8,
+            speedY: Math.random() * 0.42 + 0.16,
+            speedX: (Math.random() - 0.5) * 0.28,
+            opacity: Math.random() * 0.55 + 0.25,
+            fadeSpeed: Math.random() * 0.012 + 0.005,
+            fadingIn: Math.random() > 0.5,
+            isWarm: Math.random() > 0.35
           });
         }
-      }
 
-      // Instant unmute and play on ANY user interaction (first touch, scroll, pointer, click, key)
-      function instantUnmuteAndPlay() {
-        if (!bgAudio) return;
-        bgAudio.muted = false;
-        bgAudio.volume = 0.75;
-        const p = bgAudio.play();
-        if (p !== undefined) {
-          p.then(() => {
-            setMusicState(true);
-            removeAutoListeners();
-          }).catch(() => {});
+        function draw() {
+          var cover = document.getElementById('invitationCover');
+          if (!cover || cover.classList.contains('opening') || cover.style.display === 'none') {
+            if (animId) cancelAnimationFrame(animId);
+            window.removeEventListener('resize', resize);
+            return;
+          }
+
+          ctx.clearRect(0, 0, w, h);
+
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.y -= p.speedY;
+            p.x += Math.sin(p.y * 0.018) * 0.35 + p.speedX;
+
+            if (p.fadingIn) {
+              p.opacity += p.fadeSpeed;
+              if (p.opacity >= 0.75) p.fadingIn = false;
+            } else {
+              p.opacity -= p.fadeSpeed;
+              if (p.opacity <= 0.15) p.fadingIn = true;
+            }
+
+            if (p.y < -10) {
+              p.y = h + 10;
+              p.x = Math.random() * w;
+            }
+            if (p.x < -10) p.x = w + 10;
+            if (p.x > w + 10) p.x = -10;
+
+            var colorPrefix = p.isWarm ? '218, 165, 32,' : '255, 235, 175,';
+            
+            // Soft glowing golden halo
+            var radGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 2.5);
+            radGrad.addColorStop(0, 'rgba(' + colorPrefix + (p.opacity * 0.8) + ')');
+            radGrad.addColorStop(0.5, 'rgba(' + colorPrefix + (p.opacity * 0.3) + ')');
+            radGrad.addColorStop(1, 'rgba(' + colorPrefix + '0)');
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius * 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = radGrad;
+            ctx.fill();
+
+            // Luminous core point
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius * 0.75, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 253, 245, ' + Math.min(1, p.opacity + 0.25) + ')';
+            ctx.fill();
+          }
+
+          animId = requestAnimationFrame(draw);
+        }
+
+        draw();
+      })();
+
+      // Open Invitation Function (Clicking Cover Opens Card + Starts Music)
+      function openInvitation(e) {
+        if (isCoverOpened) return;
+        isCoverOpened = true;
+        hasUnmutedWithSound = true;
+        sessionStorage.setItem('invitation_opened', 'true');
+        removeSilentInteractionListeners();
+
+        // Celebration burst at click location
+        var clickX = (e && e.clientX) ? e.clientX : window.innerWidth / 2;
+        var clickY = (e && e.clientY) ? e.clientY : window.innerHeight / 2;
+        triggerCoverCelebration(clickX, clickY);
+
+        // Synchronously trigger background music playback (Guaranteed browser unlock gesture!)
+        if (bgAudio) {
+          bgAudio.currentTime = 0;
+          bgAudio.muted = false;
+          bgAudio.volume = TARGET_VOLUME;
+          var playPromise = bgAudio.play();
+          if (playPromise !== undefined) {
+            playPromise.then(function() {
+              updateMusicUI(true);
+            }).catch(function(err) {
+              console.warn('Playback error on open:', err);
+            });
+          }
+        }
+
+        // Animate and reveal main website
+        if (invitationCover) {
+          invitationCover.classList.add('opening');
+          setTimeout(function() {
+            invitationCover.style.display = 'none';
+            if (invitationCover.parentNode) {
+              invitationCover.parentNode.removeChild(invitationCover);
+            }
+          }, 850);
         }
       }
 
-      function pauseMusic() {
+      // Check if previously opened during this browser visit
+      var alreadyOpened = sessionStorage.getItem('invitation_opened') === 'true';
+      if (alreadyOpened) {
+        isCoverOpened = true;
+        if (invitationCover) {
+          invitationCover.style.display = 'none';
+          if (invitationCover.parentNode) {
+            invitationCover.parentNode.removeChild(invitationCover);
+          }
+        }
+      } else if (invitationCover) {
+        invitationCover.addEventListener('click', openInvitation);
+        invitationCover.addEventListener('touchstart', openInvitation, { passive: true });
+      }
+
+      // Silent Interaction Fallback (for returning visitors or background tab returns)
+      var silentListenersAttached = false;
+      var interactionEvents = ['click', 'touchstart', 'touchend', 'pointerdown', 'mousedown', 'keydown', 'scroll', 'wheel'];
+
+      function handleSilentInteraction(e) {
+        if (invitationCover && (invitationCover === e.target || invitationCover.contains(e.target))) {
+          return; // Let openInvitation handle cover clicks
+        }
+        if (musicToggle && (musicToggle === e.target || musicToggle.contains(e.target))) {
+          return; // Let musicToggle click listener handle its own event
+        }
         if (!bgAudio) return;
-        bgAudio.pause();
-        setMusicState(false);
+
+        hasUnmutedWithSound = true;
+        bgAudio.muted = false;
+        bgAudio.volume = TARGET_VOLUME;
+        var p = bgAudio.play();
+        if (p !== undefined) {
+          p.then(function() {
+            updateMusicUI(true);
+          }).catch(function() {});
+        }
+        removeSilentInteractionListeners();
       }
 
-      // Automatic playback execution immediately!
-      playMusicDirectly();
-      window.addEventListener('DOMContentLoaded', playMusicDirectly);
-      window.addEventListener('load', playMusicDirectly);
-      window.addEventListener('pageshow', playMusicDirectly);
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden && !isPlaying) playMusicDirectly();
-      });
-
-      // Capture ANY user movement anywhere on screen to guarantee unmuted music plays instantly
-      const autoEvents = ['pointerdown', 'touchstart', 'touchend', 'scroll', 'wheel', 'keydown', 'mousedown', 'mousemove', 'click'];
-      function autoHandler() {
-        instantUnmuteAndPlay();
-      }
-      function removeAutoListeners() {
-        autoEvents.forEach(evt => {
-          window.removeEventListener(evt, autoHandler, { capture: true, passive: true });
-          document.removeEventListener(evt, autoHandler, { capture: true, passive: true });
+      function attachSilentInteractionListeners() {
+        if (silentListenersAttached) return;
+        silentListenersAttached = true;
+        interactionEvents.forEach(function(evt) {
+          window.addEventListener(evt, handleSilentInteraction, { capture: true, passive: true });
+          document.addEventListener(evt, handleSilentInteraction, { capture: true, passive: true });
         });
       }
-      autoEvents.forEach(evt => {
-        window.addEventListener(evt, autoHandler, { capture: true, passive: true });
-        document.addEventListener(evt, autoHandler, { capture: true, passive: true });
-      });
 
-      // Attach instant music unlock to all interactive elements on the page
-      document.querySelectorAll('a, button').forEach(el => {
-        el.addEventListener('click', instantUnmuteAndPlay, { passive: true });
-      });
+      function removeSilentInteractionListeners() {
+        if (!silentListenersAttached) return;
+        silentListenersAttached = false;
+        interactionEvents.forEach(function(evt) {
+          window.removeEventListener(evt, handleSilentInteraction, { capture: true });
+          document.removeEventListener(evt, handleSilentInteraction, { capture: true });
+        });
+      }
 
-      // Manual Toggle button listener
+      attachSilentInteractionListeners();
+
+      // Top Navigation Music Toggle Button Click
       if (musicToggle) {
         musicToggle.addEventListener('click', function(e) {
           e.stopPropagation();
-          if (isPlaying && !bgAudio.paused) {
-            pauseMusic();
+          hasUnmutedWithSound = true;
+          removeSilentInteractionListeners();
+
+          if (!bgAudio) return;
+
+          if (isMusicPlaying && !bgAudio.paused && !bgAudio.muted) {
+            bgAudio.pause();
+            updateMusicUI(false);
           } else {
-            instantUnmuteAndPlay();
+            bgAudio.muted = false;
+            bgAudio.volume = TARGET_VOLUME;
+            bgAudio.play().then(function() {
+              updateMusicUI(true);
+            }).catch(function(err) {
+              console.error('Play error on toggle click:', err);
+            });
           }
         });
       }
+
+      // Tab visibility safeguard
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden && hasUnmutedWithSound && bgAudio && bgAudio.paused && isMusicPlaying) {
+          bgAudio.play().catch(function() {});
+        }
+      });
 
     })();
   </script>
